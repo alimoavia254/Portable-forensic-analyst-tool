@@ -39,3 +39,39 @@ A cross-platform digital forensic tool designed to collect, analyze, and report 
 ```bash
 git clone https://github.com/Portable-forensic-analyst-tool/forensic-tool.git
 cd forensic-tool
+** step 2 : Install Dependencies**
+pip install -r requirements.txt
+** step 3 : Run the tool **
+python main.py
+
+
+🖥️ Usage
+GUI Workflow
+Collect Artifacts (Order Recommended):
+
+🖱️ Collect Browser Artifacts: Extracts history/bookmarks
+
+🔌 Store USB Artifacts: Gets connected USB devices
+
+📡 Get Network Profiles: Collects WiFi connections
+
+📂 Extract File Metadata: Select directory to scan
+
+Generate Analysis:
+
+📅 Generate Timeline: Creates timeline.json
+
+📊 Generate Weekly Chart: Saves weekly_chart.png
+
+📄 Generate PDF Report: Produces forensic_report.pdf
+
+🤖 Run ML Analysis: Checks for file anomalies
+
+Output Locations:
+
+Database: forensic_tool.db
+
+Reports: Root project folder
+
+ML Logs: ml_analysis.log
+
