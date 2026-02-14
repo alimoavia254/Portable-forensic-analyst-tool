@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Digital Forensic Tool · Ali Moavia & Mehwish Naz</title>
+    <!-- Fonts: Inter (clean, corporate) + Fira Code for technical snippets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f7fb;
+            font-family: 'Inter', sans-serif;
+            color: #1e2b3f;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+
+        .portfolio-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -10px rgba(0,20,40,0.12), 0 8px 24px -8px rgba(0,32,64,0.1);
+            overflow: hidden;
+        }
+
+        /* header area */
+        .project-header {
+            padding: 2.5rem 3rem 1.5rem 3rem;
+            background: linear-gradient(145deg, #fafcff 0%, #ffffff 100%);
+            border-bottom: 1px solid #e2eaf2;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #5b6f87;
+            margin-bottom: 1.5rem;
+        }
+        .breadcrumb i {
+            font-size: 0.8rem;
+            color: #8a9bb5;
+        }
+        .breadcrumb a {
+            color: #1e4f8a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .title-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .title-main h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(145deg, #0a2942, #1b3b5c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        .title-main .subhead {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #466282;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .title-main .subhead i {
+            color: #2f7e9e;
+        }
+
+        .creators-tag {
+            background: #edf3f9;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            display: flex;
+            gap: 2.5rem;
+            box-shadow: inset 0 1px 3px #00000010;
+        }
+        .creator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .creator i {
+            font-size: 1.8rem;
+            color: #1b4c6e;
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0 4px 8px #00000010;
+        }
+        .creator-info h4 {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #0b2a41;
+        }
+        .creator-info p {
+            font-size: 0.85rem;
+            color: #55728c;
+        }
+
+        .meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+            padding: 1.2rem 0 0.2rem 0;
+            border-top: 1px solid #dde5ef;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .meta-item i {
+            font-size: 1.4rem;
+            width: 36px;
+            color: #2c6282;
+        }
+        .meta-item .label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #6b7f99;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .meta-item .value {
+            font-weight: 600;
+            color: #1d344a;
+        }
+
+        .main-content {
+            padding: 2.5rem 3rem 3rem 3rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #163A5F;
+            margin: 2.5rem 0 1.5rem 0;
+            border-bottom: 2px solid #d4e0f0;
+            padding-bottom: 0.6rem;
+        }
+        .section-title i {
+            color: #2a6b9c;
+            font-size: 2.2rem;
+        }
+
+        .lead-text {
+            font-size: 1.2rem;
+            color: #234a6b;
+            background: #f0f6fe;
+            padding: 2rem 2.5rem;
+            border-radius: 24px;
+            margin: 20px 0 30px 0;
+            border-left: 8px solid #326e9c;
+            box-shadow: 0 8px 16px -12px #183f5f30;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 35px 0 30px 0;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e1eaf2;
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 5px 0 #d1deed;
+            transition: 0.15s ease;
+        }
+        .feature-card:hover {
+            border-color: #8fb4d9;
+            box-shadow: 0 8px 0 #b2cbe4;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #1f5f8b;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #143650;
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: #3b5570;
+            font-size: 0.98rem;
+        }
+        .feature-tag {
+            display: inline-block;
+            background: #e2edfb;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            margin-top: 18px;
+            color: #1b5385;
+        }
+
+        .tech-badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0 30px 0;
+        }
+        .tech-badge {
+            background: #eaf1fa;
+            color: #1b4b74;
+            padding: 0.6rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #bdd2ec;
+        }
+
+        .code-sample {
+            background: #0b1e2f;
+            color: #dae5f5;
+            border-radius: 24px;
+            padding: 2rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin: 30px 0 25px 0;
+            border-left: 8px solid #4287b5;
+            overflow-x: auto;
+            box-shadow: 0 20px 30px -12px #102c4030;
+        }
+        .code-sample .comment {
+            color: #7b98b3;
+        }
+        .code-sample .keyword {
+            color: #ffb5a0;
+        }
+        .code-sample .func {
+            color: #b3e1ff;
+        }
+        .code-sample .string {
+            color: #c7e895;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 20px 0 30px 0;
+        }
+        .feature-list li {
+            background: #ffffff;
+            border: 1px solid #bed6f0;
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #1b4870;
+            box-shadow: 0 2px 4px #d4e2f5;
+            font-size: 0.95rem;
+        }
+        .feature-list li i {
+            color: #206694;
+            margin-right: 8px;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #e2ebf5;
+            margin: 40px 0 20px 0;
+        }
+
+        .footer-note {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 1.8rem 0 0.5rem 0;
+            color: #50748e;
+            border-top: 1px solid #d0ddee;
+            margin-top: 40px;
+        }
+        .footer-note .copyright {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline {
+            border: 1px solid #1b4c74;
+            background: transparent;
+            padding: 0.5rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #1b4c74;
+            transition: 0.15s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-outline:hover {
+            background: #1b4c74;
+            color: white;
+        }
+
+        @media (max-width: 800px) {
+            .project-header, .main-content { padding: 2rem 1.5rem; }
+            .title-row { flex-direction: column; align-items: flex-start; }
+            .creators-tag { width: 100%; justify-content: space-around; }
+            .title-main h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-container">
+        <!-- header with professional identity -->
+        <div class="project-header">
+            <div class="breadcrumb">
+                <a href="#"><i class="fas fa-home"></i> portfolio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>projects</span>
+                <i class="fas fa-chevron-right"></i>
+                <span style="font-weight: 600;">ADF-Tool</span>
+            </div>
+            <div class="title-row">
+                <div class="title-main">
+                    <h1>Advanced Digital Forensic Tool</h1>
+                    <div class="subhead">
+                        <i class="fas fa-microchip"></i>
+                        <span>comprehensive artifact acquisition · machine learning anomaly detection · anti‑forensic countermeasures</span>
+                    </div>
+                </div>
+                <div class="creators-tag">
+                    <div class="creator">
+                        <i class="fas fa-user-tie"></i>
+                        <div class="creator-info">
+                            <h4>Ali Moavia</h4>
+                            <p>forensic architect</p>
+                        </div>
+                    </div>
+                    <div class="creator">
+                        <i class="fas fa-user-graduate"></i>
+                        <div class="creator-info">
+                            <h4>Mehwish Naz</h4>
+                            <p>ML & integrity specialist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- meta information / tech stack -->
+            <div class="meta-bar">
+                <div class="meta-item">
+                    <i class="fab fa-python"></i>
+                    <div><span class="label">language</span><div class="value">Python 3.11+</div></div>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-layer-group"></i>
+                    <div><span class="label">collection layers</span><div class="value">browser · usb · network · memory · logs</div></div>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-robot"></i>
+                    <div><span class="label">ML core</span><div class="value">Isolation Forest · Random Forest</div></div>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div><span class="label">developed</span><div class="value">Q1 2025 · v3.0</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- main write‑up -->
+        <div class="main-content">
+            <!-- overview -->
+            <div class="lead-text">
+                <i class="fas fa-quote-left" style="margin-right: 8px; opacity: 0.6;"></i>
+                ADF-Tool is an enterprise‑grade forensic acquisition framework that automates the collection of over 20 artifact classes. It integrates anti‑forensic detection, machine learning‑based anomaly identification, and cryptographic integrity verification — designed for incident responders and security analysts.
+            </div>
+
+            <!-- architecture & capabilities -->
+            <div class="section-title">
+                <i class="fas fa-diagram-project"></i> forensic capabilities
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Browser artifacts</h3>
+                    <p>Extracts history, cookies, logins, and cached data from Chrome, Firefox, Edge, Brave, Opera, Safari — even from running processes.</p>
+                    <span class="feature-tag">6+ browsers</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-usb"></i></div>
+                    <h3>USB history</h3>
+                    <p>Deep registry parsing (Windows), udev/syslog analysis (Linux), ioreg/system_profiler (macOS). Tracks first/last connection, vendor IDs, serials.</p>
+                    <span class="feature-tag">cross‑platform</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Network forensics</h3>
+                    <p>Active connections, ARP cache, routing tables, firewall rules, DNS cache, and log‑based connection reconstruction.</p>
+                    <span class="feature-tag">real‑time & logs</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-memory"></i></div>
+                    <h3>Memory artifacts</h3>
+                    <p>Process listings, open file handles, network connections per PID — essential for volatility‑ready triage.</p>
+                    <span class="feature-tag">psutil deep scan</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>ML anomaly detection</h3>
+                    <p>Isolation Forest trained on file metadata, browser history, system events. Flags outliers with explainable features.</p>
+                    <span class="feature-tag">scikit‑learn</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3>Anti‑forensic counter‑measures</h3>
+                    <p>Detects rootkits, hidden processes, time stomping, and excessive file modifications. Logs suspicious patterns.</p>
+                    <span class="feature-tag">integrity first</span>
+                </div>
+            </div>
+
+            <!-- core implementation snippet (professional) -->
+            <div class="section-title">
+                <i class="fas fa-code"></i> integrity & hash‑chaining
+            </div>
+            <p style="margin-bottom: 15px;">Every collected file is hashed (SHA‑256 by default) and verified after copy to ensure bit‑perfect preservation. Directory‑wide hash manifests enable later validation.</p>
+            <div class="code-sample">
+                <span class="comment"># hash‑verified copy with integrity log</span><br>
+                <span class="keyword">def</span> <span class="func">_copy_firefox_profile</span>(self, src_profile, dest_profile):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> db <span class="keyword">in</span> self.browser_paths[<span class="string">'Firefox'</span>][<span class="string">'databases'</span>]:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src_db = src_profile / db<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> src_db.exists():<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;original_hash = self._calculate_file_hash(src_db)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shutil.copy2(src_db, dest_profile / db)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;copied_hash = self._calculate_file_hash(dest_profile / db)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> original_hash != copied_hash:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">raise</span> ValueError(<span class="string">"hash mismatch - corruption"</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._create_hash_log(src_db, dest_profile / <span class="string">"file_hashes.log"</span>)<br>
+                <span class="comment"># ... parallel threads for multi‑browser collection</span>
+            </div>
+
+            <!-- tech stack badges -->
+            <div class="tech-badge-container">
+                <span class="tech-badge"><i class="fab fa-python"></i> python3</span>
+                <span class="tech-badge"><i class="fas fa-database"></i> sqlite3 · winreg</span>
+                <span class="tech-badge"><i class="fas fa-brain"></i> sklearn · pandas</span>
+                <span class="tech-badge"><i class="fas fa-chart-pie"></i> matplotlib · seaborn</span>
+                <span class="tech-badge"><i class="fas fa-lock"></i> hashlib · integrity</span>
+                <span class="tech-badge"><i class="fas fa-terminal"></i> multi‑threading</span>
+            </div>
+
+            <!-- key features as bullet list -->
+            <div class="section-title">
+                <i class="fas fa-cogs"></i> key differentiators
+            </div>
+            <ul class="feature-list">
+                <li><i class="fas fa-check-circle"></i> automated dependency installer</li>
+                <li><i class="fas fa-check-circle"></i> 6+ browser profile extraction</li>
+                <li><i class="fas fa-check-circle"></i> cross‑platform USB artifact reconstruction</li>
+                <li><i class="fas fa-check-circle"></i> ML‑based anomaly scoring (Isolation Forest)</li>
+                <li><i class="fas fa-check-circle"></i> anti‑forensic detection (rootkit, timestomp)</li>
+                <li><i class="fas fa-check-circle"></i> HTML/CSV/JSON reporting + master report</li>
+                <li><i class="fas fa-check-circle"></i> Tkinter GUI & CLI with progress</li>
+            </ul>
+
+            <!-- sample report output (visual) -->
+            <div class="section-title">
+                <i class="fas fa-file-alt"></i> reporting & presentation
+            </div>
+            <p style="margin-bottom: 20px;">All collected data is structured into a timestamped directory with subfolders for each artifact class. The tool generates a comprehensive master HTML report with links to detailed per‑category reports, including ML anomaly tables.</p>
+            <div style="background: #eaf2fb; border-radius: 24px; padding: 1.5rem; border: 1px solid #b9d1ef;">
+                <i class="fas fa-folder-open" style="color: #1b5f8b; font-size: 1.8rem; float: left; margin-right: 20px;"></i>
+                <code style="font-family: 'Fira Code'; color: #13324b;">
+                Forensic_Collection_20250321_1430/<br>
+                ├── Browser_Data/ [Chrome, Firefox, Edge …]<br>
+                ├── USB_History/ usb_devices_*.csv<br>
+                ├── Network_Forensics/ active_connections.txt, arp_cache.txt<br>
+                ├── ML_Models/ ml_anomalies.csv, feature_importance.png<br>
+                ├── Anti_Forensic_Detection/ findings.json<br>
+                ├── Reports/ forensic_report.html (master) + 6 detailed reports<br>
+                └── collection_manifest.json  (integrity hashes)
+                </code>
+            </div>
+
+            <!-- ethical & professional context -->
+            <hr>
+            <div style="display: flex; align-items: flex-start; gap: 20px; background: #f0f7ff; border-radius: 32px; padding: 2rem; margin: 40px 0;">
+                <i class="fas fa-gavel" style="font-size: 3rem; color: #2b6c9e;"></i>
+                <div>
+                    <h3 style="font-weight: 700; color: #103858;">intended use & chain‑of‑custody</h3>
+                    <p style="color: #2b4b68;">ADF‑Tool is designed for authorised incident response, digital forensic education, and internal security audits. It implements hash verification at every copy step to support evidentiary integrity. The authors emphasise responsible usage and compliance with all applicable laws.</p>
+                </div>
+            </div>
+
+            <!-- footer with portfolio context -->
+            <div class="footer-note">
+                <div class="copyright">
+                    <i class="far fa-registered"></i> 
+                    <span>Ali Moavia & Mehwish Naz · 2025 · all rights reserved</span>
+                </div>
+                <div>
+                    <a href="#" class="btn-outline"><i class="fab fa-github"></i> private repository</a>
+                    <a href="#" class="btn-outline" style="margin-left: 12px;"><i class="fas fa-envelope"></i> contact</a>
+                </div>
+            </div>
+            <p style="text-align: right; font-size: 0.8rem; color: #71869e; margin-top: 20px;">showcasing advanced forensic engineering · updated feb 2026</p>
+        </div>
+    </div>
+</body>
+</html>
